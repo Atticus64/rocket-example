@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocket App</title>
+    <link rel="shortcut icon" href="https://rocket.rs/images/logo-boxed.png" type="image/x-icon">
+</head>
+<body>
+
+    <h1>
+        {{ title }}
+    </h1>
+
+    <button id="btn-click">
+        click me
+    </button>
+
+    <div id="container" class="container">
+            <h3> 
+                Count: <small id='elem'> 0 </small>     
+            </h3>
+    </div>
+
+
+<script>
+    const button = document.querySelector('#btn-click');
+    
+    const container = document.querySelector('#container');
+    let count = 0; 
+    button.addEventListener('click', () => {
+        const elem = document.querySelector('#elem')
+        count++ 
+        elem.textContent = count
+    })
+</script>
+
+</body>
+</html>
+
