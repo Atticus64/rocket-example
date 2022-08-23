@@ -1,6 +1,13 @@
 #[macro_use] extern crate rocket;
 use rocket_dyn_templates::{Template, context};
+use rocket::serde::{Deserialize, json::Json};
 
+#[derive(Deserialize)]
+#[serde(crate = "rocket::serde")]
+struct Persona<'r> {
+    nombre: &'r str,
+    edad: u8
+}
 
 #[get("/")]
 fn index() -> Template{
@@ -9,9 +16,24 @@ fn index() -> Template{
     })
 }
 
-#[post("/api")]
-fn api() -> &'static str{
-    "Hola Api"
+#[post("/api", data = "<persona>" )]
+fn api(persona: Json<Persona<'_>>) -> String {
+
+
+    let nombre = persona.nombre;
+    let edad  = persona.edad;
+
+    if  nombre.len() < 1 && edad.to_string().len() < 1 {
+        return format!("Test")
+    }
+    if  nombre != ""  && edad > 18 {
+        return format!("Hola {}, tu edad es {}, así que eres mayor de edad", nombre, edad)
+    } if nombre != ""  && edad < 18 {
+        return format!("Hola {}, tu edad es {}, así que eres menor de edad", nombre, edad)
+    } else {
+        return format!("Hola Api")
+    }
+    // format!("{} y {}", persona.edad, persona.nombre)
 }
 
 #[get("/")]
