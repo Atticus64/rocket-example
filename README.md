@@ -1,6 +1,6 @@
 # Rocket example
 
-Un servidor hecho en Rust con el framework Rocket.Rust
+Un servidor hecho en Rust con el framework Rocket
 
 ## Run Server 
 
