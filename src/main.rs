@@ -35,6 +35,12 @@ fn delete_profile() -> &'static str {
     "Deleted profile!"
 }
 
+#[catch(404)]
+fn not_found() -> Template {
+    Template::render("notFound", context! {
+        msg: "Not Found"
+    })
+}
 
 
 
@@ -42,6 +48,7 @@ fn delete_profile() -> &'static str {
 #[launch]
 fn rocket() -> _ {
     rocket::build()
+        .register("/", catchers![not_found])
         .mount("/", routes![index, api])
         .mount("/profile", routes![profile, create_profile, update_profile, delete_profile])
         .attach(Template::fairing())
