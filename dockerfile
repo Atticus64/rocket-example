@@ -10,4 +10,4 @@ COPY . .
 
 RUN cargo build --release
 
-CMD ROCKET_PORT=$PORT ./target/release/rocket
+CMD ROCKET_PORT=$PORT ./target/release/rocket_intro
