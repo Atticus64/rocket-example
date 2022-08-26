@@ -1,5 +1,5 @@
 #[macro_use] extern crate rocket;
-use rocket_dyn_templates::{Template, context};
+//use rocket_dyn_templates::{Template, context};
 use rocket::serde::{Deserialize, json::Json};
 
 #[derive(Deserialize)]
@@ -10,10 +10,11 @@ struct Persona<'r> {
 }
 
 #[get("/")]
-fn index() -> Template{
-    Template::render("index", context! {
-        title: "Rocket Overview"
-    })
+fn index() -> &'static str{
+    //Template::render("index", context! {
+        //title: "Rocket Overview"
+    //})
+    "Hola Mundo"
 }
 
 #[post("/api", data = "<persona>" )]
@@ -58,10 +59,11 @@ fn delete_profile() -> &'static str {
 }
 
 #[catch(404)]
-fn not_found() -> Template {
-    Template::render("notFound", context! {
-        msg: "Not Found"
-    })
+fn not_found() -> &'static str {
+    //Template::render("notFound", context! {
+        //msg: "Not Found"
+    //})
+    "Not Found"
 }
 
 
@@ -73,7 +75,7 @@ fn rocket() -> _ {
         .register("/", catchers![not_found])
         .mount("/", routes![index, api])
         .mount("/profile", routes![profile, create_profile, update_profile, delete_profile])
-        .attach(Template::fairing())
+        //.attach(Template::fairing())
 }
 
 
