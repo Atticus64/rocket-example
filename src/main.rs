@@ -9,10 +9,19 @@ struct Persona<'r> {
     edad: u8
 }
 
+
 #[get("/")]
 fn index() -> Template {
     Template::render("index", context! {
         title: "Rocket Overview"
+    })
+    // "Hola Mundo"
+}
+
+#[get("/about")]
+fn about() -> Template {
+    Template::render("about", context! {
+        title: "About Page"
     })
     // "Hola Mundo"
 }
@@ -73,7 +82,7 @@ fn not_found() -> Template {
 fn rocket() -> _ {
     rocket::build()
         .register("/", catchers![not_found])
-        .mount("/", routes![index, api])
+        .mount("/", routes![index, about, api])
         .mount("/profile", routes![profile, create_profile, update_profile, delete_profile])
         .attach(Template::fairing())
 }

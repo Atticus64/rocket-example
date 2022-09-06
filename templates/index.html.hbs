@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rocket App</title>
-    <link rel="shortcut icon" href="https://rocket.rs/images/logo-boxed.png" type="image/x-icon">
-</head>
+{{> partials/head }}
 <body>
 
-    <h1>
-        {{ title }}
-    </h1>
+    {{> partials/navbar }}
 
-    <button id="btn-click">
-        click me
-    </button>
+    <div class="container">
+        <h1 class="text-center">
+            {{ title }}
+        </h1>
+        <div id="container" class="container text-center aling-center p-2">
 
-    <div id="container" class="container">
-            <h3> 
+            <button id="btn-click" class="btn btn-primary p-2">
+                click me
+            </button>
+
+            <h3 class="p-2"> 
                 Count: <small id='elem'> 0 </small>     
             </h3>
+        </div>
     </div>
 
 
