@@ -69,7 +69,6 @@ fn about() -> Template {
     // let resp = eureka.dump();;
     let image: String = eureka["image"].to_string();
     let answer: String = eureka["answer"].to_string();
-    println!("{:#?}", eureka["image"]);
     Template::render("about", context! {
         title: "About Page",
         image,
