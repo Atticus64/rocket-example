@@ -7,6 +7,8 @@ edition = "2021"
 
 [dependencies]
 rocket = { version = "0.5.0-rc.2", features = ["json"] }
+easy-http-request = "0.2.13"
+json = "0.12.4"
 
 [dependencies.rocket_dyn_templates]
 version = "0.1.0-rc.2"

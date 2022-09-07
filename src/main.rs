@@ -1,6 +1,10 @@
 #[macro_use] extern crate rocket;
+extern crate easy_http_request;
+extern crate json;
 use rocket_dyn_templates::{Template, context};
 use rocket::serde::{Deserialize, json::Json};
+use easy_http_request::DefaultHttpRequest;
+
 
 #[derive(Deserialize)]
 #[serde(crate = "rocket::serde")]
@@ -8,7 +12,6 @@ struct Persona<'r> {
     nombre: &'r str,
     edad: u8
 }
-
 
 #[get("/")]
 fn index() -> Template {
@@ -20,8 +23,22 @@ fn index() -> Template {
 
 #[get("/about")]
 fn about() -> Template {
+    let response = DefaultHttpRequest::get_from_url_str("https://yesno.wtf/api").unwrap().send().unwrap();
+    
+    // println!("{}", response.status_code);
+    // println!("{:?}", response.headers);
+    let answer: String = String::from_utf8(response.body).unwrap(); 
+    let eureka = json::parse(&answer).unwrap();
+    // let eureka = Json(&answer);
+    // let image = String::Copy(&eureka["image"]);
+    // let resp = eureka.dump();;
+    let image: String = eureka["image"].to_string();
+    let answer: String = eureka["answer"].to_string();
+    println!("{:#?}", eureka["image"]);
     Template::render("about", context! {
-        title: "About Page"
+        title: "About Page",
+        image,
+        answer
     })
     // "Hola Mundo"
 }

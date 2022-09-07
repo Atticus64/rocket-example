@@ -3,10 +3,36 @@
 {{> partials/head }}
 <body>
     {{> partials/navbar }}
-    <div class="container justify-content-center">
+    <div class="container justify-content-center aling-items-center">
         <h1 class="text-center">{{ title }}</h1>
+        <div id="container" class="container text-center aling-items-center p-2">
+
+            
+            <img class="custom-backdrop" src="{{ image }}" alt="image">
+            <h2 width="50%" class="text-center">{{ answer }}</h2>
+        </div>
 
     </div>
+
+    
+<style>
+
+.custom-backdrop {
+    opacity: 0.4;
+    height: 50%;
+    width: 50%;
+    top: 3.5rem;
+    display: inline-block;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.8);
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+}
+    
+</style>
 
 </body>
 </html>
