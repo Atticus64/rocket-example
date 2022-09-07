@@ -28,7 +28,6 @@ fn chuck() -> Template {
     let answer: String = String::from_utf8(response.body).unwrap(); 
     let resp= json::parse(&answer).unwrap();
 
-    println!("{}", resp);
     let joke = resp["value"].to_string(); 
 
     Template::render("chuck", context! {
