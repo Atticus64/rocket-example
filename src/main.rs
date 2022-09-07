@@ -21,6 +21,22 @@ fn index() -> Template {
     // "Hola Mundo"
 }
 
+#[get("/chuck")]
+fn chuck() -> Template {
+    let response = DefaultHttpRequest::get_from_url_str("https://api.chucknorris.io/jokes/random").unwrap().send().unwrap();
+
+    let answer: String = String::from_utf8(response.body).unwrap(); 
+    let resp= json::parse(&answer).unwrap();
+
+    println!("{}", resp);
+    let joke = resp["value"].to_string(); 
+
+    Template::render("chuck", context! {
+        title: "Chuck Norris Page",
+        joke
+    })
+}
+
 #[get("/about")]
 fn about() -> Template {
     let response = DefaultHttpRequest::get_from_url_str("https://yesno.wtf/api").unwrap().send().unwrap();
@@ -99,7 +115,7 @@ fn not_found() -> Template {
 fn rocket() -> _ {
     rocket::build()
         .register("/", catchers![not_found])
-        .mount("/", routes![index, about, api])
+        .mount("/", routes![index, about, chuck, api])
         .mount("/profile", routes![profile, create_profile, update_profile, delete_profile])
         .attach(Template::fairing())
 }
