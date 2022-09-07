@@ -83,7 +83,7 @@ fn user() -> Json<User> {
 
     let usuario = User {
         name: String::from("Juan Escutia"),
-        age: 17,
+        age: 20,
         alive: false
     };
 
@@ -95,8 +95,8 @@ fn user_by_id(id: u8) -> Json<UserId> {
 
     let usuario = UserId {
         name: String::from("Tux"),
-        age: 17,
-        alive: false,
+        age: 31,
+        alive: true,
         id
     };
 
